@@ -28,37 +28,6 @@ void gap() {
   delay(600);
 }
 
-String strToBinary(char s) {
-
-  int val = int(s);
-  Serial.println(val);
-  String bin = "";
-  while (val > 0) {
-    if (val % 2 == 0) {
-      bin = '0' + bin;
-    } else {
-      bin = '1' + bin;
-    }
-    val /= 2;
-  }
-
-  return bin;
-}
-
-void binary(char n) {
-  Serial.println(n);
-  if (n == '1') {
-    dash();
-  } else if (n == '0') {
-    dot();
-
-  } else if (n == ' ') {
-    space();
-  }
-  gap();
-  gap();
-}
-
 void morse(char input) {
   Serial.println(input);
   if (input == 'a' || input == 'A') {
@@ -241,8 +210,6 @@ void morse(char input) {
 }
 
 
-
-
 void loop() {
   char n;
   int len = 0;
@@ -257,47 +224,10 @@ void loop() {
   input.trim();
   Serial.read();
 
-  Serial.println(input);
-
-  Serial.println("Select:\n0-Binary\n1-Morse ");
-
-  while (Serial.available() == 0) {
-  }
 
 
-  String select = Serial.readString();
-  select.trim();
-  Serial.read();
-
-  Serial.println(select);
-  // Serial.println("hello4");
-
-  if (select == "0") {
-    // Serial.println("hello2");
-    len = input.length();
-
-
-    for (int i = 0; i < len; i++) {
-      // Serial.println("hello1");
-
-      binval = strToBinary(input.charAt(i));
-      Serial.println(binval);
-      if (binval == "100000") {
-        binary(' ');
-      } else {
-        len1 = binval.length();
-        for (int j = 0; j < len1; j++) {
-          n = binval.charAt(j);
-          binary(n);
-        }
-      }
-    }
-  } 
-  else if (select == "1") {
-    // Serial.println("hello");
+  len = input.length();
     Serial.println(input);
-    len = input.length();
-    Serial.println(len);
     for (int i = 0; i < len; i++) {
       n = input.charAt(i);
       morse(n);
