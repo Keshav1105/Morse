@@ -30,7 +30,7 @@ void gap() {
   delay(600);
 }
 
-// Turn each character to display as morse code
+// It takes each character and map it to the morse code output
 
 void morse(char input) {
   Serial.println(input);
