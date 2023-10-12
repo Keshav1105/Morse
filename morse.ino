@@ -1,6 +1,8 @@
+// Define the led pins
 int ledPin = 9;
 int led = ledPin;
 
+// Start the Serial Monitor
 void setup() {
   Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
@@ -27,6 +29,8 @@ void dash() {
 void gap() {
   delay(600);
 }
+
+// Turn each character to display as morse code
 
 void morse(char input) {
   Serial.println(input);
@@ -215,17 +219,14 @@ void loop() {
   int len = 0;
   int len1 = 0;
   String binval;
-  Serial.println("Please enter your string: ");
 
+  Serial.println("Please enter your string: ");
+  // Loop which waits for user to enter string in Serial Monitor
   while (Serial.available() == 0) {
   }
-
   String input = Serial.readString();
   input.trim();
   Serial.read();
-
-
-
   len = input.length();
     Serial.println(input);
     for (int i = 0; i < len; i++) {
