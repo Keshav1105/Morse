@@ -2,218 +2,40 @@
 int ledPin = 13;
 int led = ledPin;
 
-// Start the Serial Monitor
-void setup() {
-  Serial.begin(9600);
-  pinMode(ledPin, OUTPUT);
-}
-
-void space() {
-  delay(1200);
-}
-
-void dot() {
-  digitalWrite(led, HIGH);
-  delay(300);
-  digitalWrite(led, LOW);
-  delay(300);
-}
-
-void dash() {
-  digitalWrite(led, HIGH);
-  delay(900);
-  digitalWrite(led, LOW);
-  delay(300);
-}
-
-void gap() {
-  delay(600);
-}
-
-// It takes each character and map it to the morse code output
-
-void morse(char input) {
-  Serial.println(input);
-  if (input == 'a' || input == 'A') {
-    dot();
-    dash();
-  } else if (input == 'b' || input == 'B') {
-    dash();
-    dot();
-    dot();
-    dot();
-
-  } else if (input == 'c' || input == 'C') {
-    dash();
-    dot();
-    dash();
-    dot();
+#include <Arduino.h>
+// Define the led pins
 
 
-  } else if (input == 'd' || input == 'D') {
-    dash();
-    dot();
-    dot();
-  } else if (input == 'e' || input == 'E') {
-    dot();
+const char morseCode[][5] = {
+  { '.', '-' },            // A
+  { '-', '.', '.', '.' },  // B
+  { '-', '.', '-', '.' },  // C
+  { '-', '.', '.' },       // D
+  { '.' },                 // E
+  { '.', '.', '-', '.' },  // F
+  { '-', '-', '.' },       // G
+  { '.', '.', '.', '.' },  // H
+  { '.', '.' },            // I
+  { '.', '-', '-', '-' },  // J
+  { '-', '.', '-' },       // K
+  { '.', '-', '.', '.' },  // L
+  { '-', '-' },            // M
+  { '-', '.' },            // N
+  { '-', '-', '-' },       // O
+  { '.', '-', '-', '.' },  // P
+  { '-', '-', '.', '-' },  // Q
+  { '.', '-', '.' },       // R
+  { '.', '.', '.' },       // S
+  { '-' },                 // T
+  { '.', '.', '-' },       // U
+  { '.', '.', '.', '-' },  // V
+  { '.', '-', '-' },       // W
+  { '-', '.', '.', '-' },  // X
+  { '-', '.', '-', '-' },  // Y
+  { '-', '-', '.', '.' },  // Z
+  { ' ' }                  // Space
+};
 
-  } else if (input == 'f' || input == 'F') {
-    dot();
-    dot();
-    dash();
-    dot();
-  } else if (input == 'g' || input == 'G') {
-    dash();
-    dash();
-    dot();
-  } else if (input == 'h' || input == 'H') {
-    dot();
-    dot();
-    dot();
-    dot();
-  } else if (input == 'i' || input == 'I') {
-    dot();
-    dot();
-  } else if (input == 'j' || input == 'J') {
-    dot();
-    dash();
-    dash();
-    dash();
-  } else if (input == 'k' || input == 'K') {
-    dash();
-    dot();
-    dash();
-  } else if (input == 'l' || input == 'L') {
-    dot();
-    dash();
-    dot();
-    dot();
-  } else if (input == 'm' || input == 'M') {
-    dash();
-    dash();
-  } else if (input == 'n' || input == 'N') {
-    dash();
-    dot();
-  } else if (input == 'o' || input == 'O') {
-    dash();
-    dash();
-    dash();
-  } else if (input == 'p' || input == 'P') {
-    dot();
-    dash();
-    dash();
-    dot();
-  } else if (input == 'q' || input == 'Q') {
-    dash();
-    dash();
-    dot();
-    dash();
-  } else if (input == 'r' || input == 'R') {
-    dot();
-    dash();
-    dot();
-  } else if (input == 's' || input == 'S') {
-    dot();
-    dot();
-    dot();
-  } else if (input == 't' || input == 'T') {
-    dash();
-  } else if (input == 'u' || input == 'U') {
-    dot();
-    dot();
-    dash();
-  } else if (input == 'v' || input == 'V') {
-    dot();
-    dot();
-    dot();
-    dash();
-  } else if (input == 'w' || input == 'W') {
-    dot();
-    dash();
-    dash();
-  } else if (input == 'x' || input == 'X') {
-    dash();
-    dot();
-    dot();
-    dash();
-  } else if (input == 'y' || input == 'Y') {
-    dash();
-    dot();
-    dash();
-    dash();
-  } else if (input == 'z' || input == 'Z') {
-    dash();
-    dash();
-    dot();
-    dot();
-  } else if (input == ' ') {
-    space();
-  } else if (input == '1') {
-    dot();
-    dash();
-    dash();
-    dash();
-    dash();
-  } else if (input == '2') {
-    dot();
-    dot();
-    dash();
-    dash();
-    dash();
-  } else if (input == '3') {
-    dot();
-    dot();
-    dot();
-    dash();
-    dash();
-  } else if (input == '4') {
-    dot();
-    dot();
-    dot();
-    dot();
-    dash();
-  } else if (input == '5') {
-    dot();
-    dot();
-    dot();
-    dot();
-    dot();
-  } else if (input == '6') {
-    dash();
-    dot();
-    dot();
-    dot();
-    dot();
-  } else if (input == '7') {
-    dash();
-    dash();
-    dot();
-    dot();
-    dot();
-  } else if (input == '8') {
-    dash();
-    dash();
-    dash();
-    dot();
-    dot();
-  } else if (input == '9') {
-    dash();
-    dash();
-    dash();
-    dash();
-    dot();
-  } else if (input == '0') {
-    dash();
-    dash();
-    dash();
-    dash();
-    dash();
-  }
-
-  gap();
-}
-
-// Decodes Morse code back to characters
 char decodeMorse(String morseCode) {
   if (morseCode == ".-") {
     return 'a';
@@ -300,6 +122,60 @@ int stringLength(String str) {
   return length;
 }
 
+// Start the Serial Monitor
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+}
+
+
+void space() {
+  delay(1200);
+}
+
+void dot() {
+  digitalWrite(led, HIGH);
+  delay(300);
+  digitalWrite(led, LOW);
+}
+
+void dash() {
+  digitalWrite(led, HIGH);
+  delay(900);
+  digitalWrite(led, LOW);
+  delay(300);
+}
+
+void gap() {
+  delay(600);
+}
+
+void morse(char input) {
+  int index = -1;
+  if (input >= 'a' && input <= 'z') {
+    index = input - 'a';
+  } else if (input >= 'A' && input <= 'Z') {
+    index = input - 'A';
+  } else if (input >= '0' && input <= '9') {
+    index = input - '0' + 26;
+  } else if (input == ' ') {
+    index = 36;
+  }
+
+  if (index != -1) {
+    for (int i = 0; morseCode[index][i] != '\0'; i++) {
+      if (morseCode[index][i] == '.') {
+        dot();
+      } else if (morseCode[index][i] == '-') {
+        dash();
+      } else {
+        space();
+      }
+    }
+    space();
+  }
+}
+
 void loop() {
   char n;
   int len = 0;
@@ -343,5 +219,10 @@ void loop() {
       char decodedChar = decodeMorse(morseCode);
       Serial.println(decodedChar);
     }
+    digitalWrite(ledPin, HIGH);
+    delay(900);
+    digitalWrite(ledPin, LOW);
+    delay(300);
   }
 }
+
