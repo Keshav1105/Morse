@@ -40,6 +40,10 @@ const char morseCode[][6] = {
     {'-','-','-','.','.'}, //8
     {'-','-','-','-','.'}, //9
     {'-','-','-','-','-'}, //0
+    {'.','-','.','-','.'}, //.
+    {'-','.','-','.','-'}, //,
+    {'.','-','-','-','.'}, //"
+    {'-','.','.','.','-'}  //'
 };
 // Start the Serial Monitor
 void setup() {
@@ -75,6 +79,14 @@ void morse(char input) {
     index = input- '0' + 26;
   } else if (input == ' ') {
     index = 26;
+  } else if (input == '\'') {
+    index = 40;
+  } else if (input == '\"') {
+    index = 39;
+  } else if (input == '\,') {
+    index = 38;
+  } else if (input == '\.') {
+    index = 37;
   }
   //Serial.println(index);
   //Serial.println(morseCode[index][0]);
