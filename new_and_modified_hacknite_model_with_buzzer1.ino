@@ -147,68 +147,7 @@ void morse(char input) {
     dot();
   } else if (input == ' ') {
     space();
-  } else if (input == '1') {
-    dot();
-    dash();
-    dash();
-    dash();
-    dash();
-  } else if (input == '2') {
-    dot();
-    dot();
-    dash();
-    dash();
-    dash();
-  } else if (input == '3') {
-    dot();
-    dot();
-    dot();
-    dash();
-    dash();
-  } else if (input == '4') {
-    dot();
-    dot();
-    dot();
-    dot();
-    dash();
-  } else if (input == '5') {
-    dot();
-    dot();
-    dot();
-    dot();
-    dot();
-  } else if (input == '6') {
-    dash();
-    dot();
-    dot();
-    dot();
-    dot();
-  } else if (input == '7') {
-    dash();
-    dash();
-    dot();
-    dot();
-    dot();
-  } else if (input == '8') {
-    dash();
-    dash();
-    dash();
-    dot();
-    dot();
-  } else if (input == '9') {
-    dash();
-    dash();
-    dash();
-    dash();
-    dot();
-  } else if (input == '0') {
-    dash();
-    dash();
-    dash();
-    dash();
-    dash();
-  }
-
+  } 
   gap();
 }
 
