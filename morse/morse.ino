@@ -1,5 +1,5 @@
 #include <Arduino.h>
-
+// Define the led pins
 int ledPin = 13;
 
 const char morseCode[][5] = {
@@ -29,19 +29,9 @@ const char morseCode[][5] = {
     {'-', '.', '.', '-'}, // X
     {'-', '.', '-', '-'}, // Y
     {'-', '-', '.', '.'}, // Z
-    {'.', '-', '-', '-', '-'}, // 1
-    {'.', '.', '-', '-', '-'}, // 2
-    {'.', '.', '.', '-', '-'}, // 3
-    {'.', '.', '.', '.', '-'}, // 4
-    {'.', '.', '.', '.', '.'}, // 5
-    {'-', '.', '.', '.', '.'}, // 6
-    {'-', '-', '.', '.', '.'}, // 7
-    {'-', '-', '-', '.', '.'}, // 8
-    {'-', '-', '-', '-', '.'}, // 9
-    {'-', '-', '-', '-', '-'}, // 0
     {' '} // Space
 };
-
+// Start the Serial Monitor
 void setup() {
   Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
@@ -64,7 +54,7 @@ void dash() {
 void space() {
   delay(1200);
 }
-
+// It takes each character and map it to the morse code output
 void morse(char input) {
   int index = -1;
   if (input >= 'a' && input <= 'z') {
@@ -93,6 +83,7 @@ void morse(char input) {
 
 void loop() {
   Serial.println("Please enter your string: ");
+  // Loop which waits for user to enter string in Serial Monitor
   while (Serial.available() == 0) {
   }
   String input = Serial.readString();
