@@ -2,7 +2,7 @@
 // Define the led pins
 int ledPin = 13;
 
-const char morseCode[][5] = {
+const char morseCode[][6] = {
     {'.', '-'}, // A
     {'-', '.', '.', '.'}, // B
     {'-', '.', '-', '.'}, // C
@@ -39,6 +39,15 @@ const char morseCode[][5] = {
     {'-','-','.','.','.'},//7
     {'-','-','-','.','.'},//8
     {'-','-','-','-','.'},//9
+    {'.','-','.','.','.'},//&
+    {'.','-','-','-','-','.'},
+    {'.','-','-','.','-','.'}, 
+    {'-','-','-','.','.','.'},
+    {'-','-','.','.','-','-'},
+    {'-','.','.','.','-'},
+    {'-','.','-','.','-','-'},//'
+    {'.','-','.','-','.','-'},//'
+    {'-','.','.','.','.','-'},
     {' '} // Space
 };
 // Start the Serial Monitor
@@ -76,6 +85,35 @@ void morse(char input) {
   } else if (input == ' ') {
     index = 36;
   }
+  else if (input == '&') {
+    index = 37;
+  }
+  else if (input == '\'') {
+    index = 38;
+  }
+  else if (input == '@') {
+    index = 39;
+  }
+  else if (input == ':') {
+    index = 40 ;
+  }
+  else if (input == ',') {
+    index = 41;
+  }
+  else if (input == '=') {
+    index = 42;
+  }
+  else if (input == '!') {
+    index = 43;
+  }
+  else if (input == '.') {
+    index = 44;
+  }
+  else if (input == '-') {
+    index = 45;
+  }
+
+
 
   if (index != -1) {
     for (int i = 0; morseCode[index][i] != '\0'; i++) {
