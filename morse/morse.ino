@@ -332,8 +332,12 @@ void loop() {
   int len1 = 0;
   String binval;
 
+  int x;
+  Serial.println("Please enter 1 or 0 if you want to either convert a string into morse code or vice versa respectively:")
+  x = Serial.read();
+  if (x == 1) {
   Serial.println("Please enter your string: ");
-  // Loop which waits for user to enter string in Serial Monitor
+  
   while (Serial.available() == 0) {
   }
   String input = Serial.readString();
@@ -346,8 +350,22 @@ void loop() {
     n = input.charAt(i);
     morse(n);
   }
-
+  }
+  else if(x == 0) {
   String morseCode;
+  if (Serial.available() >= 2) {
+    char key1 = Serial.read();
+    delay(10);
+    char key2 = Serial.read();
+
+    // Perform actions based on the input
+    if (key1 == 'G') {
+      return '.';
+    } 
+    else if (key2 == 'H') {
+      return '-';
+    }
+  }
   for (int i = 0; i < len; i++) {
     if (input.charAt(i) != ' ') {
       morseCode += input.charAt(i);
@@ -357,9 +375,9 @@ void loop() {
       morseCode = "";
     }
   }
-  // Print the last character
-  if (morseCode != "") {
+  if (morseCode != "") {   //Last Character 
     char decodedChar = decodeMorse(morseCode);
     Serial.print(decodedChar);
+  }
   }
 }
