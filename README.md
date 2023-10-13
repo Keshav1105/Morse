@@ -5,7 +5,7 @@ This is a code that turns any text into morse code and uses an led as an output.
 
 ## Model
 
-[model.png](https://www.tinkercad.com/things/6K99E8GOJGd)
+[![model](model.png)](https://www.tinkercad.com/things/6K99E8GOJGd)
 
 ## Setup
 
