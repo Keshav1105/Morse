@@ -48,7 +48,6 @@ const char morseCode[][6] = {
     {'-','.','-','.','-','-'},//'
     {'.','-','.','-','.','-'},//'
     {'-','.','.','.','.','-'},
-    {' '} // Space
 };
 // Start the Serial Monitor
 void setup() {
@@ -82,35 +81,33 @@ void morse(char input) {
     index = input - 'A';
   } else if (input >= '0' && input <= '9') {
     index = input - '0' + 26;
-  } else if (input == ' ') {
+  } 
+  else if (input == '&') {
     index = 36;
   }
-  else if (input == '&') {
+  else if (input == '\'') {
     index = 37;
   }
-  else if (input == '\'') {
+  else if (input == '@') {
     index = 38;
   }
-  else if (input == '@') {
-    index = 39;
-  }
   else if (input == ':') {
-    index = 40 ;
+    index = 39 ;
   }
   else if (input == ',') {
-    index = 41;
+    index = 40;
   }
   else if (input == '=') {
-    index = 42;
+    index = 41;
   }
   else if (input == '!') {
-    index = 43;
+    index = 42;
   }
   else if (input == '.') {
-    index = 44;
+    index = 43;
   }
   else if (input == '-') {
-    index = 45;
+    index = 44;
   }
 
 
@@ -136,7 +133,7 @@ void loop() {
   }
   String input = Serial.readString();
   input.trim();
-  Serial.read();
+ 
   for (int i = 0; i < input.length(); i++) {
     morse(input.charAt(i));
   }
