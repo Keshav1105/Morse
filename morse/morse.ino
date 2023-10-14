@@ -2,7 +2,7 @@
 // Define the led pins
 int ledPin = 13;
 
-const char morseCode[][5] = {
+const char morseCode[][6] = {
     {'.', '-'}, // A
     {'-', '.', '.', '.'}, // B
     {'-', '.', '-', '.'}, // C
@@ -29,7 +29,21 @@ const char morseCode[][5] = {
     {'-', '.', '.', '-'}, // X
     {'-', '.', '-', '-'}, // Y
     {'-', '-', '.', '.'}, // Z
-    {' '} // Space
+    {' '}, // Space
+    {'.','-','-','-','-'}, //1
+    {'.','.','-','-','-'}, //2
+    {'.','.','.','-','-'}, //3
+    {'.','.','.','.','-'}, //4
+    {'.','.','.','.','.'}, //5
+    {'-','.','.','.','.'}, //6
+    {'-','-','.','.','.'}, //7
+    {'-','-','-','.','.'}, //8
+    {'-','-','-','-','.'}, //9
+    {'-','-','-','-','-'}, //0
+    {'.','-','.','-','.'}, //.
+    {'-','.','-','.','-'}, //,
+    {'.','-','-','-','.'}, //"
+    {'-','.','.','.','-'}  //'
 };
 
 char decodeMorse(String morseCode) {
@@ -142,13 +156,28 @@ void morse(char input) {
   } else if (input >= 'A' && input <= 'Z') {
     index = input - 'A';
   } else if (input >= '0' && input <= '9') {
-    index = input - '0' + 26;
+    index = input- '0' + 26;
   } else if (input == ' ') {
-    index = 36;
+    index = 26;
+  } else if (input == '\'') {
+    index = 40;
+  } else if (input == '\"') {
+    index = 39;
+  } else if (input == '\,') {
+    index = 38;
+  } else if (input == '\.') {
+    index = 37;
   }
+  //Serial.println(index);
+  //Serial.println(morseCode[index][0]);
+  //Serial.println(morseCode[index][1]);
+  //Serial.println(morseCode[index][2]);
+  //Serial.println(morseCode[index][3]);
+  //Serial.println(morseCode[index][4]);
 
   if (index != -1) {
     for (int i = 0; morseCode[index][i] != '\0'; i++) {
+      Serial.println(i);
       if (morseCode[index][i] == '.') {
         dot();
       } else if (morseCode[index][i] == '-') {
@@ -156,6 +185,7 @@ void morse(char input) {
       } else {
         space();
       }
+      Serial.println(i);
     }
     space();
   }
