@@ -49,9 +49,6 @@ const char morseCode[][6] = {
     {'-','.','-','.','-','-'},//'
     {'.','-','.','-','.','-'},//'
     {'-','.','.','.','.','-'},
-    {' '} // Space
-
-
 };
 
 char decodeMorse(String morseCode) {
@@ -164,6 +161,7 @@ void morse(char input) {
   } else if (input >= 'A' && input <= 'Z') {
     index = input - 'A';
   } else if (input >= '0' && input <= '9') {
+
     index = input- '0' + 26;
   } else if (input == ' ') {
     index = 26;
@@ -176,33 +174,32 @@ void morse(char input) {
   } else if (input == '\.') {
     index = 37;
   }
-
   else if (input == '&') {
-    index = 37;
+    index = 36;
   }
   else if (input == '\'') {
-    index = 38;
+    index = 37;
   }
   else if (input == '@') {
-    index = 39;
+    index = 38;
   }
   else if (input == ':') {
-    index = 40 ;
+    index = 39 ;
   }
   else if (input == ',') {
-    index = 41;
+    index = 40;
   }
   else if (input == '=') {
-    index = 42;
+    index = 41;
   }
   else if (input == '!') {
-    index = 43;
+    index = 42;
   }
   else if (input == '.') {
-    index = 44;
+    index = 43;
   }
   else if (input == '-') {
-    index = 45;
+    index = 44;
   }
 
 
@@ -231,6 +228,8 @@ void loop() {
   Serial.println("Please enter 1 or 0 if you want to either convert a string into morse code or vice versa respectively:");
   while (Serial.available() == 0) {
   }
+
+
   int x = Serial.read();
   if (x == 49) {
     Serial.println("Please enter your string: ");
@@ -238,9 +237,7 @@ void loop() {
     }
     String input = Serial.readString();
     input.trim();
-    Serial.read();
-    len = input.length();
-    Serial.println(input);
+    len = input.length();  
     for (int i = 0; i < len; i++) {
       n = input.charAt(i);
       morse(n);
@@ -270,5 +267,6 @@ void loop() {
     delay(900);
     digitalWrite(ledPin, LOW);
     delay(300);
+
   }
 }
