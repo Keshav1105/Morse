@@ -29,6 +29,7 @@ const char morseCode[][6] = {
     {'-', '.', '.', '-'}, // X
     {'-', '.', '-', '-'}, // Y
     {'-', '-', '.', '.'}, // Z
+
     {'-','-','-','-','-'},//0
     {'.','-','-','-','-'},//1
     {'.','.','-','-','-'},//2
@@ -49,6 +50,85 @@ const char morseCode[][6] = {
     {'.','-','.','-','.','-'},//'
     {'-','.','.','.','.','-'},
 };
+
+char decodeMorse(String morseCode) {
+  if (morseCode == ".-") {
+    return 'a';
+  } else if (morseCode == "-...") {
+    return 'b';
+  } else if (morseCode == "-.-.") {
+    return 'c';
+  } else if (morseCode == "-..") {
+    return 'd';
+  } else if (morseCode == ".") {
+    return 'e';
+  } else if (morseCode == "..-.") {
+    return 'f';
+  } else if (morseCode == "--.") {
+    return 'g';
+  } else if (morseCode == "....") {
+    return 'h';
+  } else if (morseCode == "..") {
+    return 'i';
+  } else if (morseCode == ".---") {
+    return 'j';
+  } else if (morseCode == "-.-") {
+    return 'k';
+  } else if (morseCode == ".-..") {
+    return 'l';
+  } else if (morseCode == "--") {
+    return 'm';
+  } else if (morseCode == "-.") {
+    return 'n';
+  } else if (morseCode == "---") {
+    return 'o';
+  } else if (morseCode == ".--.") {
+    return 'p';
+  } else if (morseCode == "--.-") {
+    return 'q';
+  } else if (morseCode == ".-.") {
+    return 'r';
+  } else if (morseCode == "...") {
+    return 's';
+  } else if (morseCode == "-") {
+    return 't';
+  } else if (morseCode == "..-") {
+    return 'u';
+  } else if (morseCode == "...-") {
+    return 'v';
+  } else if (morseCode == ".--") {
+    return 'w';
+  } else if (morseCode == "-..-") {
+    return 'x';
+  } else if (morseCode == "-.--") {
+    return 'y';
+  } else if (morseCode == "--..") {
+    return 'z';
+  } else if (morseCode == ".----") {
+    return '1';
+  } else if (morseCode == "..---") {
+    return '2';
+  } else if (morseCode == "...--") {
+    return '3';
+  } else if (morseCode == "....-") {
+    return '4';
+  } else if (morseCode == ".....") {
+    return '5';
+  } else if (morseCode == "-....") {
+    return '6';
+  } else if (morseCode == "--...") {
+    return '7';
+  } else if (morseCode == "---..") {
+    return '8';
+  } else if (morseCode == "----.") {
+    return '9';
+  } else if (morseCode == "-----") {
+    return '0';
+  } else {
+    return ' ';
+  }
+}
+
 // Start the Serial Monitor
 void setup() {
   Serial.begin(9600);
@@ -72,6 +152,7 @@ void dash() {
 void space() {
   delay(1200);
 }
+
 // It takes each character and map it to the morse code output
 void morse(char input) {
   int index = -1;
@@ -80,8 +161,19 @@ void morse(char input) {
   } else if (input >= 'A' && input <= 'Z') {
     index = input - 'A';
   } else if (input >= '0' && input <= '9') {
-    index = input - '0' + 26;
-  } 
+
+    index = input- '0' + 26;
+  } else if (input == ' ') {
+    index = 26;
+  } else if (input == '\'') {
+    index = 40;
+  } else if (input == '\"') {
+    index = 39;
+  } else if (input == '\,') {
+    index = 38;
+  } else if (input == '\.') {
+    index = 37;
+  }
   else if (input == '&') {
     index = 36;
   }
@@ -114,6 +206,7 @@ void morse(char input) {
 
   if (index != -1) {
     for (int i = 0; morseCode[index][i] != '\0'; i++) {
+      Serial.println(i);
       if (morseCode[index][i] == '.') {
         dot();
       } else if (morseCode[index][i] == '-') {
@@ -121,20 +214,59 @@ void morse(char input) {
       } else {
         space();
       }
+      Serial.println(i);
     }
     space();
   }
 }
 
 void loop() {
-  Serial.println("Please enter your string: ");
-  // Loop which waits for user to enter string in Serial Monitor
+  char n;
+  int len = 0;
+  int len1 = 0;
+  String binval;
+  Serial.println("Please enter 1 or 0 if you want to either convert a string into morse code or vice versa respectively:");
   while (Serial.available() == 0) {
   }
-  String input = Serial.readString();
-  input.trim();
- 
-  for (int i = 0; i < input.length(); i++) {
-    morse(input.charAt(i));
+
+
+  int x = Serial.read();
+  if (x == 49) {
+    Serial.println("Please enter your string: ");
+    while (Serial.available() == 0) {
+    }
+    String input = Serial.readString();
+    input.trim();
+    len = input.length();  
+    for (int i = 0; i < len; i++) {
+      n = input.charAt(i);
+      morse(n);
+    }
+  }
+  if (x == 48) {
+    String morseCode;
+    Serial.println("Enter morse code");
+    while (Serial.available() == 0) {
+    }
+    String input = Serial.readString();
+    len = stringLength(input);
+    for (int i = 0; i < len; i++) {
+      if (input.charAt(i) != ' ') {
+        morseCode += input.charAt(i);
+      } else {
+        char decodedChar = decodeMorse(morseCode);
+        Serial.print(decodedChar);
+        morseCode = "";
+      }
+    }
+    if (morseCode != "") {  //Last Character
+      char decodedChar = decodeMorse(morseCode);
+      Serial.println(decodedChar);
+    }
+    digitalWrite(ledPin, HIGH);
+    delay(900);
+    digitalWrite(ledPin, LOW);
+    delay(300);
+
   }
 }
